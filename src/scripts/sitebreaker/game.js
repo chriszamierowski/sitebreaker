@@ -1,34 +1,40 @@
-let Util = require("./util");
-let StateMachine = require("./../../../node_modules/javascript-state-machine/state-machine.min");
-let MainLoop = require("./../../../node_modules/mainloop.js/build/mainloop.min");
+let Util = require('./util');
+let StateMachine = require('./../../../node_modules/javascript-state-machine/state-machine.min');
+let MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min');
+let Ball = require('./ball');
+let Player = require('./player');
+let Math = require('./math');
 
 export default class Game {
   constructor () {
     this.util = new Util();
+    this.math = new Math();
 
     this.util.addStylesheet();
-    this.canvas = this.setupCanvas();
     this.width = this.util.getWindowWidth();
     this.height = this.util.getWindowHeight();
-    
-    this.context = this.canvas.getContext('2d');
+    this.setupCanvas();
+    this.setupStateMachine();
+    this.setupLoop();
 
-    this.stateMachine = this.setupStateMachine();
+    this.player = new Player(this);
 
-    this.loop = this.setupLoop();
-
-    this.startLoop();
+    this.stateMachine.play();
   }
 
   setupCanvas() {
     let canvas = document.createElement('canvas');
     canvas.className = 'sitebreaker-canvas';
+    canvas.width = this.width;
+    canvas.height = this.height;
     document.body.appendChild(canvas);
-    return canvas;
+
+    this.canvas = canvas;
+    this.context = this.canvas.getContext('2d');
   }
 
   setupStateMachine() {
-    return StateMachine.create({
+    this.stateMachine = StateMachine.create({
       initial: 'menu',
       events: [
         { name: 'play', from: 'menu', to: 'game' },
@@ -41,6 +47,7 @@ export default class Game {
         },
 
         ongame: (event, from, to) => {
+          this.startLoop();
         },
 
         onleavegame: (event, from, to) => {
@@ -53,7 +60,7 @@ export default class Game {
   }
 
   setupLoop() {
-    return MainLoop
+    this.loop = MainLoop
       .setUpdate((d) => this.updateLoop(d))
       .setDraw((d) => this.drawLoop(d))
       .setEnd((d) => this.endLoop(d));
@@ -69,6 +76,7 @@ export default class Game {
 
   drawLoop(delta) {
     // console.log('draw');
+    this.player.draw(this.context);
   }
 
   endLoop(delta) {
