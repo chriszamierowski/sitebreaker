@@ -1,1 +1,1 @@
-console.log('sitebreaker');
+let player = require("./player");
