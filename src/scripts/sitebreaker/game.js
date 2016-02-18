@@ -1,6 +1,7 @@
 import * as Util from './util';
 import * as SitebreakerMath from './math';
 import * as Events from './events';
+import * as Blocks from './blocks';
 
 let StateMachine = require('./../../../node_modules/javascript-state-machine/state-machine.min'),
     MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min'),
@@ -12,6 +13,7 @@ export default class Game {
     this.util = Util;
     this.math = SitebreakerMath;
     this.events = Events;
+    this.blocks = Blocks;
 
     this.util.addStylesheet();
     this.width = this.util.getWindowWidth();
@@ -22,6 +24,8 @@ export default class Game {
 
     this.player = new Player(this);
     this.ball = new Ball(this);
+
+    this.blocks.findBlocks();
 
     this.stateMachine.play();
   }
