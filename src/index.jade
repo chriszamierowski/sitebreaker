@@ -18,8 +18,9 @@ html.no-js
           img(src="images/sitebreaker-logo.svg", alt="Sitebreaker")
         h2 Play the classic game of Breakout using your favorite websites as levels
       .play
-        button#sitebreaker-start(title="Play Sitebreaker!")
+        a(title="Play Sitebreaker!", href="javascript:var%20s%20=%20document.createElement('script');document.body.appendChild(s);s.src='//sitebreaker.chriszamierowski.com/scripts/sitebreaker.js';void(0);")
           img(src="images/play.svg", alt="Play Sitebreaker!")
+        a(title="Play Sitebreaker!", href="javascript:var%20s%20=%20document.createElement('script');document.body.appendChild(s);s.src='scripts/sitebreaker.js';void(0);") dev
         p (or drag the button to your bookmark bar to play on other sites)
     #grid.grid
     script(src="scripts/main.js")
