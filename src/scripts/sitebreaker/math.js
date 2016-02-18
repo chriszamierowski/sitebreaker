@@ -1,5 +1,5 @@
 /* taken from https://github.com/jakesgordon/javascript-breakout */
-export default class Math {
+export default class SitebreakerMath {
   constructor() {}
 
   bound(box) {
@@ -92,7 +92,7 @@ export default class Math {
   ballIntercept(ball, rect, nx, ny) {
     var pt;
     if (nx < 0) {
-      pt = Game.Math.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+      pt = this.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
                                rect.right  + ball.radius, 
                                rect.top    - ball.radius, 
                                rect.right  + ball.radius, 
@@ -100,7 +100,7 @@ export default class Math {
                                "right");
     }
     else if (nx > 0) {
-      pt = Game.Math.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+      pt = this.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
                                rect.left   - ball.radius, 
                                rect.top    - ball.radius, 
                                rect.left   - ball.radius, 
@@ -109,7 +109,7 @@ export default class Math {
     }
     if (!pt) {
       if (ny < 0) {
-        pt = Game.Math.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+        pt = this.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
                                  rect.left   - ball.radius, 
                                  rect.bottom + ball.radius, 
                                  rect.right  + ball.radius, 
@@ -117,7 +117,7 @@ export default class Math {
                                  "bottom");
       }
       else if (ny > 0) {
-        pt = Game.Math.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+        pt = this.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
                                  rect.left   - ball.radius, 
                                  rect.top    - ball.radius, 
                                  rect.right  + ball.radius, 

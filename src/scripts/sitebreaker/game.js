@@ -3,13 +3,13 @@ let StateMachine = require('./../../../node_modules/javascript-state-machine/sta
 let MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min');
 let Ball = require('./ball');
 let Player = require('./player');
-let sMath = require('./math');
+let SitebreakerMath = require('./math');
 let Events = require('./events');
 
 export default class Game {
   constructor () {
     this.util = new Util();
-    this.math = new sMath();
+    this.math = new SitebreakerMath();
     this.events = new Events(this);
 
     this.util.addStylesheet();
@@ -20,6 +20,7 @@ export default class Game {
     this.setupLoop();
 
     this.player = new Player(this);
+    this.ball = new Ball(this);
 
     this.stateMachine.play();
   }
@@ -75,12 +76,14 @@ export default class Game {
   updateLoop(delta) {
     // console.log('update');
     this.player.update(delta);
+    this.ball.update(delta);
   }
 
   drawLoop(delta) {
     // console.log('draw');
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.player.draw(this.context);
+    this.ball.draw(this.context);
   }
 
   endLoop(delta) {
