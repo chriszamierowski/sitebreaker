@@ -36,8 +36,8 @@ gulp.task('sass', function () {
 });
 
 
-gulp.task('js', function() {
-  return gulp.src('src/scripts/*.js')
+gulp.task('mainjs', function() {
+  return gulp.src('src/scripts/main/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe(through2.obj(function (file, enc, next) {
@@ -55,7 +55,31 @@ gulp.task('js', function() {
         this.emit('end')
     })
     .pipe($.uglify())
-  .pipe( $.rename('app.js'))
+  .pipe( $.rename('main.js'))
+  .pipe($.sourcemaps.write())
+  .pipe( gulp.dest('dist/scripts/'));
+});
+
+gulp.task('sitebreakerjs', function() {
+  return gulp.src('src/scripts/sitebreaker/*.js')
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe(through2.obj(function (file, enc, next) {
+      browserify(file.path, { debug: true })
+        .transform(require('babelify'))
+        .transform(require('debowerify'))
+        .bundle(function (err, res) {
+          if (err) { return next(err); }
+          file.contents = res;
+            next(null, file);
+        });
+      }))
+      .on('error', function (error) {
+        console.log(error.stack);
+        this.emit('end')
+    })
+    .pipe($.uglify())
+  .pipe( $.rename('sitebreaker.js'))
   .pipe($.sourcemaps.write())
   .pipe( gulp.dest('dist/scripts/'));
 });
@@ -82,7 +106,7 @@ gulp.task('templates', function() {
     .pipe( gulp.dest('dist/') )
 });
 
-gulp.task('build', ['sass', 'js', 'templates', 'images']);
+gulp.task('build', ['clean', 'sass', 'mainjs', 'sitebreakerjs', 'templates', 'images']);
 
 gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/**/*.{scss,sass}',['sass', reload]);
