@@ -3,12 +3,14 @@ let StateMachine = require('./../../../node_modules/javascript-state-machine/sta
 let MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min');
 let Ball = require('./ball');
 let Player = require('./player');
-let Math = require('./math');
+let sMath = require('./math');
+let Events = require('./events');
 
 export default class Game {
   constructor () {
     this.util = new Util();
-    this.math = new Math();
+    this.math = new sMath();
+    this.events = new Events(this);
 
     this.util.addStylesheet();
     this.width = this.util.getWindowWidth();
@@ -72,10 +74,12 @@ export default class Game {
 
   updateLoop(delta) {
     // console.log('update');
+    this.player.update(delta);
   }
 
   drawLoop(delta) {
     // console.log('draw');
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.player.draw(this.context);
   }
 
