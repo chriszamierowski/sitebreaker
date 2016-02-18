@@ -1,16 +1,17 @@
-let Util = require('./util');
-let StateMachine = require('./../../../node_modules/javascript-state-machine/state-machine.min');
-let MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min');
-let Ball = require('./ball');
-let Player = require('./player');
-let SitebreakerMath = require('./math');
-let Events = require('./events');
+import * as Util from './util';
+import * as SitebreakerMath from './math';
+import * as Events from './events';
+
+let StateMachine = require('./../../../node_modules/javascript-state-machine/state-machine.min'),
+    MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min'),
+    Ball = require('./ball'),
+    Player = require('./player');
 
 export default class Game {
   constructor () {
-    this.util = new Util();
-    this.math = new SitebreakerMath();
-    this.events = new Events(this);
+    this.util = Util;
+    this.math = SitebreakerMath;
+    this.events = Events;
 
     this.util.addStylesheet();
     this.width = this.util.getWindowWidth();

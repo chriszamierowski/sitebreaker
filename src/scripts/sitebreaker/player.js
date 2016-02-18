@@ -75,13 +75,15 @@ export default class Player {
   }
 
   handleEvents() {
-    if(this.game.events.keysPressed.LEFT) {
+    let keys = this.game.events.keysPressed();
+    
+    if(keys.LEFT) {
       this.moveLeft();
     } else {
       this.stopMovingLeft();
     }
 
-    if(this.game.events.keysPressed.RIGHT) {
+    if(keys.RIGHT) {
       this.moveRight();
     } else {
       this.stopMovingRight();

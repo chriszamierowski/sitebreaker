@@ -59,7 +59,9 @@ export default class Ball {
   }
 
   handleEvents() {
-    if(this.game.events.keysPressed.SPACE) {
+    let keys = this.game.events.keysPressed();
+
+    if(keys.SPACE) {
       this.fire();
     }
   }

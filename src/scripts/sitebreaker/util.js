@@ -1,23 +1,17 @@
-export default class Util {
-  constructor() {
+export function addStylesheet() {
+  let link = document.createElement('link');
 
-  }
+  link.type = 'text/css';
+  link.rel = 'stylesheet';
+  link.href = '../stylesheets/sitebreaker.css';
 
-  addStylesheet() {
-    let link = document.createElement('link');
+  document.body.appendChild(link);
+}
 
-    link.type = 'text/css';
-    link.rel = 'stylesheet';
-    link.href = '../stylesheets/sitebreaker.css';
+export function getWindowWidth() {
+  return window.innerWidth;
+}
 
-    document.body.appendChild(link);
-  }
-
-  getWindowWidth() {
-    return window.innerWidth;
-  }
-
-  getWindowHeight() {
-    return window.innerHeight;
-  }
+export function getWindowHeight() {
+  return window.innerHeight;
 }
