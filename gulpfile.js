@@ -116,7 +116,8 @@ gulp.task('build', function(callback) {
 
 gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/**/*.{scss,sass}',['sass', reload]);
-  gulp.watch('src/scripts/**/*.js',['js', reload]);
+  gulp.watch('src/scripts/main/**/*.js',['mainjs', reload]);
+  gulp.watch('src/scripts/sitebreaker/**/*.js',['sitebreakerjs', reload]);
   gulp.watch('src/images/**/*',['images', reload]);
   gulp.watch('src/*.jade',['templates', reload]);
 });
