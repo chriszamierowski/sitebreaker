@@ -5,7 +5,8 @@ var gulp        = require('gulp'),
     through2    = require('through2'),
     reload      = browserSync.reload,
     browserify  = require('browserify'),
-    argv        = require('yargs').argv;
+    argv        = require('yargs').argv,
+    runSequence = require('run-sequence');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -17,7 +18,7 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('sass', ['clean'], function () {
+gulp.task('sass', function () {
   return gulp.src('./src/stylesheets/**/*.{scss,sass}')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
@@ -35,7 +36,7 @@ gulp.task('sass', ['clean'], function () {
 });
 
 
-gulp.task('mainjs', ['clean'], function() {
+gulp.task('mainjs', function() {
   return gulp.src('src/scripts/main/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -59,7 +60,7 @@ gulp.task('mainjs', ['clean'], function() {
   .pipe( gulp.dest('dist/scripts/'));
 });
 
-gulp.task('sitebreakerjs', ['clean'], function() {
+gulp.task('sitebreakerjs', function() {
   return gulp.src('src/scripts/sitebreaker/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -89,7 +90,7 @@ gulp.task('clean', function(cb) {
     .pipe($.clean());
 });
 
-gulp.task('images', ['clean'], function() {
+gulp.task('images', function() {
   return gulp.src('./src/images/**/*')
     .pipe($.imagemin({
       progressive: true
@@ -97,7 +98,7 @@ gulp.task('images', ['clean'], function() {
     .pipe(gulp.dest('./dist/images'))
 })
 
-gulp.task('templates', ['clean'], function() {
+gulp.task('templates', function() {
   return gulp.src('src/*.jade')
     .pipe($.plumber())
     .pipe($.jade({
@@ -106,7 +107,12 @@ gulp.task('templates', ['clean'], function() {
     .pipe( gulp.dest('dist/') )
 });
 
-gulp.task('build', ['sass', 'mainjs', 'sitebreakerjs', 'templates', 'images']);
+gulp.task('build', function(callback) {
+  runSequence(
+    'clean',
+    ['sass', 'mainjs', 'sitebreakerjs', 'templates', 'images'],
+    callback);
+});
 
 gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/**/*.{scss,sass}',['sass', reload]);
