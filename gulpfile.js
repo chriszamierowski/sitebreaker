@@ -55,9 +55,9 @@ gulp.task('mainjs', function() {
         this.emit('end')
     })
     .pipe($.uglify())
-  .pipe( $.rename('main.js'))
-  .pipe($.sourcemaps.write())
-  .pipe( gulp.dest('dist/scripts/'));
+    .pipe( $.rename('main.js'))
+    .pipe($.sourcemaps.write())
+    .pipe( gulp.dest('dist/scripts/'));
 });
 
 gulp.task('sitebreakerjs', function() {
@@ -79,9 +79,9 @@ gulp.task('sitebreakerjs', function() {
         this.emit('end')
     })
     .pipe($.uglify())
-  .pipe( $.rename('sitebreaker.js'))
-  .pipe($.sourcemaps.write())
-  .pipe( gulp.dest('dist/scripts/'));
+    .pipe( $.rename('sitebreaker.js'))
+    .pipe($.sourcemaps.write())
+    .pipe( gulp.dest('dist/scripts/'));
 });
 
 
