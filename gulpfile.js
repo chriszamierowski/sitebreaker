@@ -5,7 +5,6 @@ var gulp        = require('gulp'),
     through2    = require('through2'),
     reload      = browserSync.reload,
     browserify  = require('browserify'),
-    del         = require('del'),
     argv        = require('yargs').argv;
 
 gulp.task('browser-sync', function() {
@@ -18,7 +17,7 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', ['clean'], function () {
   return gulp.src('./src/stylesheets/**/*.{scss,sass}')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
@@ -36,7 +35,7 @@ gulp.task('sass', function () {
 });
 
 
-gulp.task('mainjs', function() {
+gulp.task('mainjs', ['clean'], function() {
   return gulp.src('src/scripts/main/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -60,7 +59,7 @@ gulp.task('mainjs', function() {
   .pipe( gulp.dest('dist/scripts/'));
 });
 
-gulp.task('sitebreakerjs', function() {
+gulp.task('sitebreakerjs', ['clean'], function() {
   return gulp.src('src/scripts/sitebreaker/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -86,10 +85,11 @@ gulp.task('sitebreakerjs', function() {
 
 
 gulp.task('clean', function(cb) {
-  del('./dist', cb);
+  return gulp.src('./dist', {read: false})
+    .pipe($.clean());
 });
 
-gulp.task('images', function() {
+gulp.task('images', ['clean'], function() {
   return gulp.src('./src/images/**/*')
     .pipe($.imagemin({
       progressive: true
@@ -97,7 +97,7 @@ gulp.task('images', function() {
     .pipe(gulp.dest('./dist/images'))
 })
 
-gulp.task('templates', function() {
+gulp.task('templates', ['clean'], function() {
   return gulp.src('src/*.jade')
     .pipe($.plumber())
     .pipe($.jade({
@@ -106,7 +106,7 @@ gulp.task('templates', function() {
     .pipe( gulp.dest('dist/') )
 });
 
-gulp.task('build', ['clean', 'sass', 'mainjs', 'sitebreakerjs', 'templates', 'images']);
+gulp.task('build', ['sass', 'mainjs', 'sitebreakerjs', 'templates', 'images']);
 
 gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/**/*.{scss,sass}',['sass', reload]);
