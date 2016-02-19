@@ -101,4 +101,24 @@ export default class UI {
       </div>`;
     this.dialog.appendChild(this.win);
   }
+
+  showInstructions() {
+    this.instructions = document.createElement('div');
+    this.instructions.innerHTML = 
+     `<div class="sitebreaker-instructions">
+      <p>&#9664; &amp; &#9654; to move.</p>
+      <p>Spacebar to shoot a ball.</p>
+      <p>Destroy all blocks.</p>
+      <button id="sitebreaker-close-instructions"><img src="data:image/svg+xml;utf8,<svg width='185' height='51' viewBox='0 0 185 51' xmlns='http://www.w3.org/2000/svg'><title>Begin</title><path d='M16.648 31.488h6.264V38.4h-6.264v-6.912zm6.264-12.6h-6.264v-5.616h6.264v5.616zM32.344 51c3.744 0 6.336-2.592 6.336-6.264V31.992c0-3.744-3.024-6.12-6.48-6.12v-1.368c3.456 0 6.48-2.376 6.48-6.048V6.864C38.68 3.192 36.088.6 32.344.6H.88V51h31.464zm45.072 0V38.4h-18v-6.912h15.48v-12.6h-15.48v-5.616h15.48l2.52-6.408V.6H43.72V51h33.696zM88.072.6c-3.744 0-6.336 2.592-6.336 6.264v37.872c0 3.672 2.592 6.264 6.336 6.264h31.464V21.48h-15.768V38.4h-6.264V13.272h19.224l2.52-6.408V.6H88.072zm52.92 50.4V.6h-15.696V51h15.696zM170.8 23.928L163.456.6h-16.704V51h14.472v-6.264l-2.016-16.992h1.224L167.848 51h16.704V.6h-14.544v6.264l2.088 17.064H170.8z' fill='#FFF' fill-rule='evenodd'/></svg>"></button>
+      </div>`;
+    this.dialog.appendChild(this.instructions);
+
+    document.getElementById('sitebreaker-close-instructions').addEventListener('click', (e) => {
+      this.game.stateMachine.start();
+    });
+  }
+
+  hideInstructions() {
+    this.dialog.innerHTML = '';
+  }
 }

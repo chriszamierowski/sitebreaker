@@ -40,13 +40,13 @@ export default class Game {
     this.setupStage();
     this.setupCanvas();
     this.setupBounds();
+
+    this.ui = new UI(this);
+
     this.setupStateMachine();
     // this.loop();
 
-    this.ui = new UI(this);
     this.player = new Player(this);
-
-    this.stateMachine.play();
   }
 
   setupStage() {
@@ -97,15 +97,24 @@ export default class Game {
 
   setupStateMachine() {
     this.stateMachine = StateMachine.create({
-      initial: 'menu',
+      initial: 'intro',
       events: [
-        { name: 'play', from: 'menu', to: 'game' },
-        { name: 'lose', from: 'game', to: 'menu' },
-        { name: 'win', from: 'game', to: 'menu' }
+        { name: 'start', from: 'intro', to: 'game' },
+        { name: 'play', from: 'dialog', to: 'game' },
+        { name: 'lose', from: 'game', to: 'dialog' },
+        { name: 'win', from: 'game', to: 'dialog' }
       ],
       callbacks: {
         ongame: (event, from, to) => {
           this.startLoop();
+        },
+
+        onintro: () => {
+          this.ui.showInstructions();
+        },
+
+        onleaveintro: () => {
+          this.ui.hideInstructions();
         },
 
         onleavegame: (event, from, to) => {
@@ -168,7 +177,7 @@ export default class Game {
   handleEvents() {
     let keys = this.events.keysPressed();
 
-    if(keys.SPACE) {
+    if(keys.SPACE && this.stateMachine.is('game')) {
       let now = new Date().getTime();
 
       if(this.ballsRemaining > 0 && (now - this.lastFire > this.fireWait)) {

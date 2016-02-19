@@ -3,6 +3,10 @@
 @import 'block';
 @import 'ui';
 
+$btn-color: #53B6B5;
+$btn-color-hover: #50A0A0;
+$btn-color-shadow: #4F8483;
+
 .sitebreaker-stage {
   position: fixed;
   top: 0;
@@ -12,6 +16,7 @@
   height: 100%;
   width: 100%;
   z-index: 9999;
+  font-family: 'Raleway' sans-serif;
 }
 
 /* .sitebreaker-canvas {
@@ -26,4 +31,38 @@
 
 .sitebreaker-hidden {
   visibility: hidden;
+}
+
+.sitebreaker-stage button {
+  appearance: none;
+  background-color: $btn-color;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1;
+  padding: 1em 2em;
+  text-decoration: none;
+  transition: all .08s ease-in;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-shadow: 0px .5em 0px $btn-color-shadow;
+  outline: none;
+  position: relative;
+  top: 0em;
+  background-image: radial-gradient(ellipse at 4% 5%, $btn-color 0, $btn-color 69%, $btn-color-hover 70%);
+  margin-top: 1em;
+
+  &:active {
+    box-shadow: 0px 0em 0px $btn-color-shadow;
+    top: .5em;
+    background-image: radial-gradient(ellipse at 4% 5%, $btn-color-hover 0,  $btn-color-hover 86%);
+  }
+
+  img {
+    width: 50%;
+  }
 }
