@@ -1,3 +1,3 @@
-var game = require("./game");
+let game = require("./game");
 
-let g = new game();
+new game();

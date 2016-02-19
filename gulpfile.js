@@ -78,7 +78,7 @@ gulp.task('sitebreakerjs', function() {
         console.log(error.stack);
         this.emit('end')
     })
-    // .pipe($.uglify())
+    .pipe($.if(argv.production, $.uglify()))
     .pipe( $.rename('sitebreaker.js'))
     .pipe($.sourcemaps.write())
     .pipe( gulp.dest('dist/scripts/'));
@@ -102,15 +102,25 @@ gulp.task('templates', function() {
   return gulp.src('src/*.jade')
     .pipe($.plumber())
     .pipe($.jade({
-      pretty: true
+      pretty: true,
+      locals: {
+        prod: argv.production
+      }
     }))
     .pipe( gulp.dest('dist/') )
 });
 
+gulp.task('favicon', function() {
+  return gulp.src('src/favicon.ico')
+    .pipe($.copy('dist/', {
+      prefix: 1
+    }));
+})
+
 gulp.task('build', function(callback) {
   runSequence(
     'clean',
-    ['sass', 'mainjs', 'sitebreakerjs', 'templates', 'images'],
+    ['sass', 'mainjs', 'sitebreakerjs', 'templates', 'images', 'favicon'],
     callback);
 });
 
