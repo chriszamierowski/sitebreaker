@@ -4,7 +4,7 @@ export default class Player {
       speed: 500,
       w: 150,
       h: 15,
-      img: 'images/paddle.svg'
+      img: 'https://chriszamierowski.github.io/sitebreaker/images/paddle.svg'
     };
 
     this.img = new Image();

@@ -3,7 +3,7 @@ export function addStylesheet() {
 
   link.type = 'text/css';
   link.rel = 'stylesheet';
-  link.href = 'stylesheets/sitebreaker.css';
+  link.href = 'https://chriszamierowski.github.io/sitebreaker/stylesheets/sitebreaker.css';
 
   document.body.appendChild(link);
 }

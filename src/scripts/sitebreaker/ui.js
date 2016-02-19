@@ -12,15 +12,15 @@ export default class UI {
 
     this.scoreboard.innerHTML =
       `<div title="Your Score">
-        <img src="images/star.svg"/>
+        <img src="https://chriszamierowski.github.io/sitebreaker/images/star.svg"/>
         <span id="sitebreaker-score" class="sitebreaker-score"></span>
       </div>
       <div title="Balls Remaining">
-        <img src="images/ball.svg"/>
+        <img src="https://chriszamierowski.github.io/sitebreaker/images/ball.svg"/>
         <i>x</i><span id="sitebreaker-balls" class="sitebreaker-balls"></span>
       </div>
       <div title="Blocks Remaining">
-        <img src="images/block.svg"/>
+        <img src="https://chriszamierowski.github.io/sitebreaker/images/block.svg"/>
         <i>x</i><span id="sitebreaker-blocks" class="sitebreaker-blocks"></span>
       </div>`;
 

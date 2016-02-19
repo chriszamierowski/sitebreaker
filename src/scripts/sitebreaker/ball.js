@@ -3,7 +3,7 @@ export default class Ball {
     this.config = {
       speed: 400,
       radius: 10,
-      img: 'images/ball.svg'
+      img: 'https://chriszamierowski.github.io/sitebreaker/images/ball.svg'
     };
 
     this.img = new Image();
