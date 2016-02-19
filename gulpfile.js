@@ -54,7 +54,7 @@ gulp.task('mainjs', function() {
         console.log(error.stack);
         this.emit('end')
     })
-    .pipe($.uglify())
+    .pipe($.if(argv.production, $.uglify()))
     .pipe( $.rename('main.js'))
     .pipe($.sourcemaps.write())
     .pipe( gulp.dest('dist/scripts/'));
@@ -133,3 +133,8 @@ gulp.task('serve', ['build', 'browser-sync'], function () {
 });
 
 gulp.task('default', ['serve']);
+
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe($.ghPages());
+});
