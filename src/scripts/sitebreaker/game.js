@@ -6,7 +6,8 @@ import * as Blocks from './blocks';
 let StateMachine = require('./../../../node_modules/javascript-state-machine/state-machine.min'),
     MainLoop = require('./../../../node_modules/mainloop.js/build/mainloop.min'),
     Ball = require('./ball'),
-    Player = require('./player');
+    Player = require('./player'),
+    UI = require('./ui');
 
 export default class Game {
   constructor () {
@@ -22,19 +23,32 @@ export default class Game {
     this.right = this.width;
     this.top = 0;
     this.bottom = this.height;
+    this.score = 0;
 
     //do this before adding any elements so we don't have to worry about them getting tagged as blocks
     this.blockList = this.blocks.findBlocks();
 
+    this.setupStage();
     this.setupCanvas();
     this.setupBounds();
     this.setupStateMachine();
     this.setupLoop();
 
+    this.ui = new UI(this);
     this.player = new Player(this);
     this.ball = new Ball(this);
 
     this.stateMachine.play();
+  }
+
+  setupStage() {
+    let stage = document.createElement('div');
+
+    stage.classList.add('sitebreaker-stage');
+    stage.width = this.width;
+    stage.height = this.height;
+    this.stage = stage;
+    document.body.appendChild(this.stage);
   }
 
   setupCanvas() {
@@ -42,7 +56,7 @@ export default class Game {
     canvas.classList.add('sitebreaker-canvas');
     canvas.width = this.width;
     canvas.height = this.height;
-    document.body.appendChild(canvas);
+    this.stage.appendChild(canvas);
 
     this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
@@ -114,6 +128,7 @@ export default class Game {
     // console.log('update');
     this.player.update(delta);
     this.ball.update(delta);
+    this.ui.update();
   }
 
   drawLoop(delta) {
@@ -124,5 +139,9 @@ export default class Game {
   }
 
   endLoop(delta) {
+  }
+
+  increaseScore(s) {
+    this.score+=s;
   }
 }

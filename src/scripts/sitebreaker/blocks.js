@@ -20,8 +20,9 @@ export function findBlocks() {
         w: elem.offsetWidth,
         h: elem.offsetHeight,
         isBlock: true,
-        hit: false,
-        elem: elem
+        destroyed: false,
+        elem: elem,
+        score: Math.round(elem.offsetHeight*elem.offsetHeight/100)
       };
 
       elem.classList.add('sitebreaker-block');
@@ -46,7 +47,8 @@ function hasOnlyTextChildren(elem) {
   return elem.childElementCount === 0;
 }
 
-export function destroyBlock(block) {
-  block.hit = true;
+export function destroyBlock(block, game) {
+  game.increaseScore(block.score);
+  block.destroyed = true;
   block.elem.parentNode.removeChild(block.elem);
 }

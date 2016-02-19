@@ -1,0 +1,64 @@
+$bottom-border-width: 3px;
+$background-color: #989898;
+$border-color:  #666;
+
+.sitebreaker-scoreboard {
+  $img-height: 40px;
+  $div-height: 30px;
+  $font-size: 20px;
+  $border-radius: 6px;
+  $border-width: 0 0 $bottom-border-width 0;
+  $padding: 4px 5px 0 $img-height;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  img {
+    width: $img-height;
+    height: $img-height;
+    position: absolute;
+    top: ($div-height - $img-height)/2 - ($bottom-border-width/2);
+    left: -9px;
+  }
+
+  div {
+    border-radius: $border-radius;
+    position: relative;
+    height: $div-height;
+    padding: $padding;
+    margin-bottom: $img-height/2;
+    box-sizing: border-box;
+    font-size: $font-size;
+    line-height: $font-size;
+    background-color: rgba($background-color, .8);
+    border-width: $border-width;
+    border-style: solid;
+    border-color: $border-color;
+    text-align: right;
+    color: rgb(240,240,240);
+    box-shadow: 0 0 0 1px rgba(30,30,30,.8);
+
+    i {
+      color: #ddd;
+      margin-right: 3px;
+      font-style: normal;
+    }
+
+    span {
+      color: rgb(240,240,240);
+      transition: color .2s ease-out;
+
+      &.sitebreaker-score, &.sitebreaker-blocks {
+        &.sitebreaker-updating {
+          color: rgb(0,256,0);
+        }
+      }
+
+      &.sitebreaker-balls {
+        &.sitebreaker-updating {
+          color: rgb(256,0,0);
+        }
+      }
+    }
+  }
+}

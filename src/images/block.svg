@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="434px" height="279px" viewBox="0 0 434 279" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>brick</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="brick" sketch:type="MSLayerGroup" transform="translate(9.000000, 5.000000)">
+            <g id="Group-8" sketch:type="MSShapeGroup">
+                <path d="M302,112.433646 L302,185 L117,185 L117,175.191507 L0,235.095098 L0,132.095098 L258,5.68434189e-14 L258,44 L258,0 L421,34.9473691 L421,137.947369 L302,112.433646 Z" id="Rectangle-29" fill="#82E5BF"></path>
+                <path d="M117,183.624949 L117,175.191507 L99.7960025,183.999894 C99.6973524,183.999965 99.5986849,184 99.5,184 C63.087401,184 29.0361041,179.168238 -3.19744231e-14,170.773068 L0,132.095098 L219.111313,19.9108717 C234.030852,25.572675 247.152323,32.2700234 258,39.7755574 L258,44 L258,39.7755574 C279.441993,54.6113247 292,72.6047706 292,92 C292,139.990901 215.11375,179.3994 117,183.624949 Z" id="Rectangle-29" fill="#8EE4C3"></path>
+                <path d="M163,166.947369 L163,269.947369 L2.27373675e-13,235 L2.27373675e-13,132 L163,166.947369 Z" id="Rectangle-29" fill="#86BBA7"></path>
+                <path d="M103.323432,257.152651 L1.13686838e-13,235 L1.13686838e-13,132 L134.808492,160.903081 C138.189753,169.671752 140,178.929655 140,188.5 C140,215.045503 126.072779,239.187225 103.323422,257.152658 Z" id="Rectangle-29" fill="#8FC6B1"></path>
+                <path d="M163,269.947369 L421,137.852271 L421,34.8522712 L163,166.947369 L163,269.947369 Z" id="Rectangle-29" fill="#75BEA2"></path>
+            </g>
+            <path d="M421,86.3998202 L421,34.8522712 L258,0 L0.130917157,132.028069 L2.27373675e-13,183.547549 L0,235.095098 L163,269.947369 L420.869083,137.9193 L421,86.3998202 Z" id="Rectangle-29" stroke="#3EC28F" stroke-width="5" sketch:type="MSShapeGroup"></path>
+            <ellipse id="Oval-43" fill-opacity="0.56" fill="#BFEFA3" sketch:type="MSShapeGroup" transform="translate(134.459220, 96.103102) rotate(-13.000000) translate(-134.459220, -96.103102) " cx="134.45922" cy="96.1031021" rx="44" ry="11.5"></ellipse>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="132px" height="132px" viewBox="0 0 132 132" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>star</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="61 84.5 33.3740931 99.0237987 38.6501719 68.2618994 16.3003437 46.4762013 47.1870466 41.9881006 61 14 74.8129534 41.9881006 105.699656 46.4762013 83.3498281 68.2618994 88.6259069 99.0237987 "></polygon>
+        <path d="M34.2194996,63.9430613 L16.3003437,46.4762013 L47.1870466,41.9881006 L61,14 L69.6727907,31.5729933 C64.2911972,46.5761977 51.0880252,58.572481 34.2194996,63.9430613 Z" id="path-2"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="star" sketch:type="MSLayerGroup" transform="translate(5.000000, 5.000000)">
+            <circle id="Oval-14" stroke="#DA8E00" stroke-width="5" fill="#FFC42D" sketch:type="MSShapeGroup" cx="61" cy="61" r="61"></circle>
+            <path d="M80.5903164,3.21381365 C104.669882,11.3744304 122,34.1633823 122,61 C122,94.6893697 94.6893697,122 61,122 C34.1633823,122 11.3744304,104.669882 3.21381365,80.5903164 C3.07214314,78.7454714 3,76.8811607 3,75 C3,35.235498 35.235498,3 75,3 C76.8811607,3 78.7454714,3.07214314 80.5903164,3.21381365 Z" id="Oval-14" fill="#FFBE2D" sketch:type="MSShapeGroup"></path>
+            <g id="Star-1">
+                <use stroke="#DA8E00" stroke-width="3" fill="#FFB62D" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                <use stroke="none" fill="none" xlink:href="#path-1"></use>
+            </g>
+            <g id="Star-1">
+                <use fill="#FFC42D" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-2"></use>
+                <use fill="none" xlink:href="#path-2"></use>
+            </g>
+        </g>
+    </g>
+</svg>

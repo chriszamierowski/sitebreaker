@@ -66,7 +66,7 @@ export default class Ball {
 
     for (let n = 0; n < this.colliders.length; n++) {
       item = this.colliders[n];
-      if (!item.hit) {
+      if (!item.destroyed) {
         point = this.game.math.ballIntercept(this, item, newPosition.nx, newPosition.ny);
           
         if (point) {
@@ -83,7 +83,7 @@ export default class Ball {
     if (closest) {
 
       if (closest.item.isBlock) {
-        this.game.blocks.destroyBlock(closest.item);
+        this.game.blocks.destroyBlock(closest.item, this.game);
         if (!this.moving) {
           return;
         }
