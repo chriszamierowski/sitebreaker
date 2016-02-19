@@ -1,5 +1,6 @@
 .sitebreaker-block {
-  border: 1px solid red !important;
+  border: 1px solid $btn-color !important;
+  transition: all 1s ease-in-out;
 }
 
 /* any tags that have nothing in them and aren't able to be destroyed shouldn't display */

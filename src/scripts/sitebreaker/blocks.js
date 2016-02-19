@@ -1,9 +1,11 @@
 import * as SitebreakerMath from './math';
+let ColorScheme = require('./../../../node_modules/color-scheme/lib/color-scheme');
 
 // add a `sitebreaker-block` class to all potential blocks
 export function findBlocks() {
   let allTags = Array.from(document.body.querySelectorAll('*')),
-      blocks = [];
+      blocks = [],
+      colors = generateColors();
 
   for (let [index, elem] of allTags.entries()) {
     if(
@@ -27,16 +29,32 @@ export function findBlocks() {
             isBlock: true,
             destroyed: false,
             elem: elem
-          };
+          },
+          colorIndex = Math.floor(Math.random()*(colors.length-1));
 
       block.score = Math.round(block.w*block.y/100);
 
       elem.classList.add('sitebreaker-block');
+      //wait a cycle to allow css from ^ class to paint
+      setTimeout(() => {
+        elem.style.backgroundColor = '#'+colors[colorIndex];
+      });
       blocks.push(SitebreakerMath.bound(block));
     }
   }
 
   return blocks;
+}
+
+function generateColors() {
+  let scheme = new ColorScheme;
+
+  scheme.from_hex('EC802F')
+        .distance(.75)
+        .scheme('analogic')
+        .variation('pastel');
+
+  return scheme.colors();
 }
 
 function isValidBlock(elem) {

@@ -78,7 +78,7 @@ gulp.task('sitebreakerjs', function() {
         console.log(error.stack);
         this.emit('end')
     })
-    .pipe($.uglify())
+    // .pipe($.uglify())
     .pipe( $.rename('sitebreaker.js'))
     .pipe($.sourcemaps.write())
     .pipe( gulp.dest('dist/scripts/'));

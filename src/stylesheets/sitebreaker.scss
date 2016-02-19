@@ -1,11 +1,12 @@
 @import 'normalize';
 @import url(https://fonts.googleapis.com/css?family=Raleway);
-@import 'block';
-@import 'ui';
 
 $btn-color: #53B6B5;
 $btn-color-hover: #50A0A0;
 $btn-color-shadow: #4F8483;
+
+@import 'block';
+@import 'ui';
 
 .sitebreaker-stage {
   position: fixed !important;
