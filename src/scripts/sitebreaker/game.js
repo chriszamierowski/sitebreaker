@@ -189,7 +189,7 @@ export default class Game {
   }
 
   removeBall(ball) {
-    let ind = this.balls.find((b) => b == ball);
+    let ind = this.balls.findIndex((b) => b == ball);
 
     this.balls.splice(ind, 1);
 
