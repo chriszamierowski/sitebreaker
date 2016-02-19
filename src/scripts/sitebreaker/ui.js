@@ -97,7 +97,7 @@ export default class UI {
     this.win.innerHTML = 
      `<div class="sitebreaker-win">
       <h1>You Won!</h1>
-      <h2>Final Score: <span>${ this.player.score }</span></h2>
+      <h2>Final Score: <span>${ this.game.score }</span></h2>
       </div>`;
     this.dialog.appendChild(this.win);
   }

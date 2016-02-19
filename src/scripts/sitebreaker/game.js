@@ -100,14 +100,10 @@ export default class Game {
       initial: 'menu',
       events: [
         { name: 'play', from: 'menu', to: 'game' },
-        { name: 'leave', from: 'game', to: 'menu' },
         { name: 'lose', from: 'game', to: 'menu' },
         { name: 'win', from: 'game', to: 'menu' }
       ],
       callbacks: {
-        onmenu: function(event, from, to) {
-        },
-
         ongame: (event, from, to) => {
           this.startLoop();
         },
@@ -120,9 +116,6 @@ export default class Game {
           } else {
             this.ui.showGameOver();
           }
-        },
-
-        onbeforeleave: function(event, from, to) {
         }
       }
     });

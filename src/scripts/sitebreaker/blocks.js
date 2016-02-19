@@ -14,16 +14,22 @@ export function findBlocks() {
       // <p>text<span>more</span>text</p>
       hasOnlyTextChildren(elem)
     ) {
-      let block = {
-        x: elem.offsetLeft,
-        y: elem.offsetTop,
-        w: elem.offsetWidth,
-        h: elem.offsetHeight,
-        isBlock: true,
-        destroyed: false,
-        elem: elem,
-        score: Math.round(elem.offsetHeight*elem.offsetHeight/100)
-      };
+      let rect = elem.getBoundingClientRect(),
+          block = {
+            top: rect.top,
+            right: rect.right,
+            left: rect.left,
+            bottom: rect.bottom,
+            x: rect.left,
+            y: rect.top,
+            w: elem.offsetWidth,
+            h: elem.offsetHeight,
+            isBlock: true,
+            destroyed: false,
+            elem: elem
+          };
+
+      block.score = Math.round(block.w*block.y/100);
 
       elem.classList.add('sitebreaker-block');
       blocks.push(SitebreakerMath.bound(block));
@@ -51,4 +57,11 @@ export function destroyBlock(block, game) {
   game.increaseScore(block.score);
   block.destroyed = true;
   block.elem.parentNode.removeChild(block.elem);
+
+  game.blocksHit = game.blocksHit ? game.blocksHit + 1 : 1;
+  console.log('game.blocksHit',game.blocksHit);
+  console.log('game.blockList.length',game.blockList.length);
+  if(game.blocksHit === game.blockList.length) {
+    game.stateMachine.win();
+  }
 }

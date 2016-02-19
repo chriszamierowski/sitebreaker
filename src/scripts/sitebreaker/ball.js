@@ -64,7 +64,11 @@ export default class Ball {
 
     for (let n = 0; n < this.colliders.length; n++) {
       item = this.colliders[n];
+      
       if (!item.destroyed) {
+        //need to recompute the position of elements because they change when other DOM elements are removed
+        this.game.math.bound(item);
+        
         point = this.game.math.ballIntercept(this, item, newPosition.nx, newPosition.ny);
           
         if (point) {
