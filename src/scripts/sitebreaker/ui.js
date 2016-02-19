@@ -3,6 +3,7 @@ export default class UI {
     this.game = game;
 
     this.setupScoreboard();
+    this.setupDialog();
   }
 
   setupScoreboard() {
@@ -20,7 +21,7 @@ export default class UI {
       </div>
       <div title="Blocks Remaining">
         <img src="images/block.svg"/>
-        <span id="sitebreaker-blocks" class="sitebreaker-blocks"></span>
+        <i>x</i><span id="sitebreaker-blocks" class="sitebreaker-blocks"></span>
       </div>`;
 
     this.game.stage.appendChild(this.scoreboard);
@@ -30,9 +31,15 @@ export default class UI {
     this.scoreboardBlocks = document.getElementById('sitebreaker-blocks');
   }
 
+  setupDialog() {
+    this.dialog = document.createElement('div');
+    this.dialog.classList.add('sitebreaker-dialog');
+    this.game.stage.appendChild(this.dialog);
+  }
+
   update() {
     this.updateScore();
-    // this.updateBalls();
+    this.updateBalls();
     this.updateBlocks();
   }
 
@@ -45,8 +52,11 @@ export default class UI {
   }
 
   updateBalls() {
-    // this.scoreboardBalls.innerHTML = `${ this.game.balls.length }`;
-    this.showUpdate(this.scoreboardBalls);
+    if(this.game.ballsRemaining != this.lastBallsRemaining ) {
+      this.scoreboardBalls.innerHTML = `${ this.game.ballsRemaining }`;
+      this.showUpdate(this.scoreboardBalls);
+      this.lastBallsRemaining = this.game.ballsRemaining;
+    }
   }
 
   updateBlocks() {
@@ -70,5 +80,25 @@ export default class UI {
     setTimeout(()=>{
       elem.classList.remove('sitebreaker-updating');
     }, 100);
+  }
+
+  showGameOver() {
+    this.gameOver = document.createElement('div');
+    this.gameOver.innerHTML = 
+     `<div class="sitebreaker-gameover">
+      <h1>Game Over</h1>
+      <h2>Final Score: <span>${ this.game.score }</span></h2>
+      </div>`;
+    this.dialog.appendChild(this.gameOver);
+  }
+
+  showWin() {
+    this.win = document.createElement('div');
+    this.win.innerHTML = 
+     `<div class="sitebreaker-win">
+      <h1>You Won!</h1>
+      <h2>Final Score: <span>${ this.player.score }</span></h2>
+      </div>`;
+    this.dialog.appendChild(this.win);
   }
 }

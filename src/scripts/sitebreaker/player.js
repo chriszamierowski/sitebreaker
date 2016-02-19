@@ -1,7 +1,7 @@
 export default class Player {
   constructor (game) {
     this.config = {
-      speed: 1,
+      speed: 500,
       w: 150,
       h: 15,
       img: 'images/paddle.svg'

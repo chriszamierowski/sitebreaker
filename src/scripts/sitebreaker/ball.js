@@ -1,7 +1,7 @@
 export default class Ball {
   constructor (game) {
     this.config = {
-      speed: .5,
+      speed: 400,
       radius: 10,
       img: 'images/ball.svg'
     };
@@ -55,8 +55,6 @@ export default class Ball {
         item,
         closest = null,
         block;
-
-    this.handleEvents();
 
     if (!this.moving) {
       return this.moveToPaddle();
@@ -112,8 +110,7 @@ export default class Ball {
     }
 
     if ((newPosition.x < 0) || (newPosition.y < 0) || (newPosition.x > this.game.width) || (newPosition.y > this.game.height)) {
-      // this.game.loseBall();
-      // this.game.loop.end();
+      this.game.removeBall(this);
     }
     else {
       this.setPosition(newPosition.x,  newPosition.y);
@@ -128,13 +125,5 @@ export default class Ball {
   fire() {
     this.setPosition(this.game.player.x, this.game.player.y - (this.game.player.h/2) - this.radius);
     this.setDirection(Math.abs(this.game.player.dright) - Math.abs(this.game.player.dleft), -1);
-  }
-
-  handleEvents() {
-    let keys = this.game.events.keysPressed();
-
-    if(keys.SPACE) {
-      this.fire();
-    }
   }
 }
