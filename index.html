@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sitebreaker</title>
+    <meta name="description" content="Play the classic game of Breakout using your favorite websites as levels">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="stylesheets/main.css">
+  </head>
+  <body><!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+    <div class="wrapper">
+      <div class="hero">
+        <h1><img src="images/sitebreaker-logo.svg" alt="Sitebreaker"></h1>
+        <h2>Play the classic game of Breakout using websites as levels</h2>
+      </div>
+      <div class="play"><a title="Play Sitebreaker!" href="javascript:var%20s%20=%20document.createElement('script');document.body.appendChild(s);s.src='//sitebreaker.chriszamierowski.com/scripts/sitebreaker.js';void(0);"><img src="images/play.svg" alt="Play Sitebreaker!"></a>
+        <p>(or drag the button to your bookmark bar to play on other sites)</p>
+      </div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <script src="scripts/main.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-XXXXXX', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
