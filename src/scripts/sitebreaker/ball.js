@@ -44,7 +44,7 @@ export default class Ball {
 
 
   moveToPaddle() {
-    this.setPosition(this.game.player.left + (this.game.player.w/2), this.game.bounds.bottom - this.game.player.h - this.radius);
+    this.setPosition(this.game.player.x + (this.game.player.w/2), this.game.player.y - (this.game.player.h/2) - this.radius);
   }
 
   update(delta) {
@@ -68,7 +68,7 @@ export default class Ball {
       if (!item.destroyed) {
         //need to recompute the position of elements because they change when other DOM elements are removed
         this.game.math.bound(item);
-        
+
         point = this.game.math.ballIntercept(this, item, newPosition.nx, newPosition.ny);
           
         if (point) {
@@ -127,7 +127,7 @@ export default class Ball {
   }
 
   fire() {
-    this.setPosition(this.game.player.x, this.game.player.y - (this.game.player.h/2) - this.radius);
+    this.moveToPaddle();
     this.setDirection(Math.abs(this.game.player.dright) - Math.abs(this.game.player.dleft), -1);
   }
 }

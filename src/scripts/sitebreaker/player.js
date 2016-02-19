@@ -20,10 +20,11 @@ export default class Player {
     this.speed = this.config.speed;
     this.w = this.config.w;
     this.h = this.config.h;
-    this.minX = this.w/2;
-    this.maxX = this.game.width - (this.w/2);
+    this.minX = 0;
+    this.maxX = this.game.width - this.w;
 
-    this.setPosition(this.game.width/2, this.game.height - this.h*2);
+    //position upper left hand corner
+    this.setPosition(this.game.width/2 - this.w/2, this.game.height - this.h*2);
     this.setDirection(0);
   }
 
@@ -55,7 +56,7 @@ export default class Player {
   }
 
   draw(context) {
-    context.drawImage(this.img, this.x - this.w/2, this.y - this.h/2, this.w, this.h);
+    context.drawImage(this.img, this.x, this.y, this.w, this.h);
   }
 
   moveLeft() {

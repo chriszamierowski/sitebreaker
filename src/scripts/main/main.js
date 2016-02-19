@@ -17,7 +17,7 @@ for(rows = 0; rows<5; rows++) {
     block.style.top = rows*10+'vh';
     block.style.right = widthRemaining+'%';
     block.style.width = widthChoice+'%';
-    // grid.appendChild(block);
+    grid.appendChild(block);
   }
 }
 

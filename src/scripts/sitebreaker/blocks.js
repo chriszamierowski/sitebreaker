@@ -59,8 +59,6 @@ export function destroyBlock(block, game) {
   block.elem.parentNode.removeChild(block.elem);
 
   game.blocksHit = game.blocksHit ? game.blocksHit + 1 : 1;
-  console.log('game.blocksHit',game.blocksHit);
-  console.log('game.blockList.length',game.blockList.length);
   if(game.blocksHit === game.blockList.length) {
     game.stateMachine.win();
   }

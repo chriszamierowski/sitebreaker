@@ -40,11 +40,11 @@ export default class Game {
     this.setupStage();
     this.setupCanvas();
     this.setupBounds();
+    this.loop();
 
     this.ui = new UI(this);
 
     this.setupStateMachine();
-    // this.loop();
 
     this.player = new Player(this);
   }
@@ -118,8 +118,8 @@ export default class Game {
         },
 
         onleavegame: (event, from, to) => {
-          // MainLoop.stop();
-          this.endLoop();
+          MainLoop.stop();
+          // this.endLoop();
           if(event === 'win') {
             this.ui.showWin();
           } else {
@@ -131,31 +131,29 @@ export default class Game {
   }
 
   loop() {
-    // MainLoop
-    //   .setUpdate((d) => this.updateLoop(d))
-    //   .setDraw(() => this.drawLoop())
-    //   .setEnd(() => this.endLoop());
-    this._start  = new Date().getTime();
-    this.updateLoop((this._start - this.lastFrame)/1000.0); // send dt as seconds
-    this._middle = new Date().getTime();
-    this.drawLoop();
-    this._end    = new Date().getTime();
-    // this.updateStats(this._middle - this._start, this._end - this._middle);
-    this.lastFrame = this._start;
+    this.loop = MainLoop
+      .setUpdate((d) => this.updateLoop(d))
+      .setDraw(() => this.drawLoop())
+      .setEnd(() => this.endLoop());
+    // this._start  = new Date().getTime();
+    // this.updateLoop((this._start - this.lastFrame)/1000.0); // send dt as seconds
+    // this._middle = new Date().getTime();
+    // this.drawLoop();
+    // this._end    = new Date().getTime();
+    // // this.updateStats(this._middle - this._start, this._end - this._middle);
+    // this.lastFrame = this._start;
   }
 
   startLoop() {
-    // MainLoop.start();
-    this.lastFrame = new Date().getTime();
-    this.timer     = setInterval(this.loop.bind(this), this.interval);
+    MainLoop.start();
   }
 
   updateLoop(delta) {
     // console.log('update');
     this.handleEvents();
     // console.log('update');
-    this.player.update(delta);
-    this.balls.forEach((b) => b.update(delta));
+    this.player.update(delta/1000);
+    this.balls.forEach((b) => b.update(delta/1000));
     this.ui.update();
   }
 
@@ -166,9 +164,7 @@ export default class Game {
     this.balls.forEach((b) => b.draw(this.context));
   }
 
-  endLoop() {
-    clearInterval(this.timer);
-  }
+  endLoop() {}
 
   increaseScore(s) {
     this.score+=s;
@@ -177,6 +173,7 @@ export default class Game {
   handleEvents() {
     let keys = this.events.keysPressed();
 
+    // console.log('isrunning',this.loop.isRunning());
     if(keys.SPACE && this.stateMachine.is('game')) {
       let now = new Date().getTime();
 
