@@ -1,10 +1,10 @@
 .sitebreaker-block {
-  border: 1px solid red;
+  border: 1px solid red !important;
 }
 
 /* any tags that have nothing in them and aren't able to be destroyed shouldn't display */
-:not(.sitebreaker-block):not(area):not(base):not(br):not(col):not(command):not(embed):not(hr):not(img):not(input):not(keygen):not(link):not(meta):not(param):not(source):not(track):not(wbr):empty {
-  display: none;
+:not([class^='sitebreaker']):not(area):not(base):not(br):not(col):not(command):not(embed):not(hr):not(img):not(input):not(keygen):not(link):not(meta):not(param):not(source):not(track):not(wbr):empty {
+  display: none !important;
 }
 
 .sitebreaker-stage :empty {
