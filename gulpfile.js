@@ -30,7 +30,9 @@ gulp.task('sass', function () {
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe($.cssnano())
+    .pipe($.cssnano({
+      zindex: false
+    }))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('dist/stylesheets'));
 });
