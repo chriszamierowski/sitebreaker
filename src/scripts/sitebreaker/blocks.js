@@ -48,5 +48,5 @@ function hasOnlyTextChildren(elem) {
 
 export function destroyBlock(block) {
   block.hit = true;
-  block.elem.style.display = 'none';
+  block.elem.parentNode.removeChild(block.elem);
 }
