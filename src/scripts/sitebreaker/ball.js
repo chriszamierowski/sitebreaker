@@ -1,7 +1,7 @@
 export default class Ball {
   constructor (game) {
     this.config = {
-      speed: .1,
+      speed: .5,
       radius: 10,
       img: 'images/ball.svg'
     };
@@ -9,8 +9,14 @@ export default class Ball {
     this.img = new Image();
     this.img.src = this.config.img;
 
-
     this.game = game;
+
+    this.colliders = [
+      this.game.player,
+      this.game.bounds.top,
+      this.game.bounds.left,
+      this.game.bounds.right,
+    ].concat(this.game.blockList);
 
     this.reset();
   }
@@ -18,6 +24,8 @@ export default class Ball {
   reset() {
     this.speed = this.config.speed;
     this.radius = this.config.radius;
+    this.moveToPaddle();
+    this.setDirection(0,0);
   }
 
   setPosition(x, y) {
@@ -31,22 +39,86 @@ export default class Ball {
 
     this.dx = dir.x;
     this.dy = dir.y;
+    this.moving = dir.m != 0;
   }
 
 
-  move(x) {
-    
+  moveToPaddle() {
+    this.setPosition(this.game.player.left + (this.game.player.w/2), this.game.bounds.bottom - this.game.player.h - this.radius);
   }
 
   update(delta) {
-    var newPosition;
+    let newPosition,
+        mCurrent,
+        mClosest = Infinity,
+        point,
+        item,
+        closest = null,
+        block;
 
     this.handleEvents();
 
+    if (!this.moving) {
+      return this.moveToPaddle();
+    }
+
     newPosition = this.game.math.move(this.x, this.y, this.dx * this.speed, this.dy * this.speed, delta);
 
-    this.setPosition(newPosition.x,  newPosition.y);
-    this.setDirection(newPosition.dx, newPosition.dy);
+    for (let n = 0; n < this.colliders.length; n++) {
+      item = this.colliders[n];
+      if (!item.hit) {
+        point = this.game.math.ballIntercept(this, item, newPosition.nx, newPosition.ny);
+          
+        if (point) {
+         mCurrent = this.game.math.magnitude(point.x - this.x, point.y - this.y);
+
+          if (mCurrent < mClosest) {
+            mClosest = mCurrent;
+            closest = {item: item, point: point};
+          }
+        }
+      }
+    }
+
+    if (closest) {
+
+      if (closest.item.isBlock) {
+        this.game.blocks.destroyBlock(closest.item);
+        if (!this.moving) {
+          return;
+        }
+      }
+
+      if ((closest.item == this.game.player) && (closest.point.d == 'top')) {
+        newPosition.dx = this.speed * (closest.point.x - (this.game.player.left + this.game.player.w/2)) / (this.game.player.w/2);
+      }
+
+      this.setPosition(closest.point.x, closest.point.y);
+
+      switch(closest.point.d) {
+        case 'left':
+        case 'right':
+          this.setDirection(-newPosition.dx, newPosition.dy);
+          break;
+
+        case 'top':
+        case 'bottom':
+          this.setDirection(newPosition.dx, -newPosition.dy);
+          break;
+      }
+
+      var udt = delta * (mClosest / this.game.math.magnitude(newPosition.nx, newPosition.ny)); // how far along did we get before intercept ?
+      return this.update(delta - udt); // so we can update for time remaining
+    }
+
+    if ((newPosition.x < 0) || (newPosition.y < 0) || (newPosition.x > this.game.width) || (newPosition.y > this.game.height)) {
+      // this.game.loseBall();
+      // this.game.loop.end();
+    }
+    else {
+      this.setPosition(newPosition.x,  newPosition.y);
+      this.setDirection(newPosition.dx, newPosition.dy);
+    }
   }
 
   draw(context) {
@@ -54,7 +126,7 @@ export default class Ball {
   }
 
   fire() {
-    this.setPosition(this.game.player.x, this.game.player.y - (this.game.player.height/2) - this.radius);
+    this.setPosition(this.game.player.x, this.game.player.y - (this.game.player.h/2) - this.radius);
     this.setDirection(Math.abs(this.game.player.dright) - Math.abs(this.game.player.dleft), -1);
   }
 

@@ -2,8 +2,8 @@
   border: 1px solid red;
 }
 
-/* *:not(.sitebreaker-block) {
+body *:not(.sitebreaker-block):not(.sitebreaker-canvas) {
   &:empty {
     display: none;
   }
-} */
+}

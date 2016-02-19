@@ -18,27 +18,59 @@ export default class Game {
     this.util.addStylesheet();
     this.width = this.util.getWindowWidth();
     this.height = this.util.getWindowHeight();
+    this.left = 0;
+    this.right = this.width;
+    this.top = 0;
+    this.bottom = this.height;
+
+    //do this before adding any elements so we don't have to worry about them getting tagged as blocks
+    this.blockList = this.blocks.findBlocks();
+
     this.setupCanvas();
+    this.setupBounds();
     this.setupStateMachine();
     this.setupLoop();
 
     this.player = new Player(this);
     this.ball = new Ball(this);
 
-    this.blocks.findBlocks();
-
     this.stateMachine.play();
   }
 
   setupCanvas() {
     let canvas = document.createElement('canvas');
-    canvas.className = 'sitebreaker-canvas';
+    canvas.classList.add('sitebreaker-canvas');
     canvas.width = this.width;
     canvas.height = this.height;
     document.body.appendChild(canvas);
 
     this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
+  }
+
+  setupBounds() {
+    let boundSize = 10;
+
+    this.bounds = {
+      top: this.math.bound({
+        x: this.left - boundSize,
+        y: this.top - boundSize*2,
+        w: this.width + boundSize*2,
+        h: boundSize*2
+      }),
+      left: this.math.bound({
+        x: this.left - boundSize,
+        y: this.top - boundSize*2,
+        w: boundSize,
+        h: boundSize*2 + this.height
+      }),
+      right: this.math.bound({
+        x: this.right,
+        y: this.top - boundSize*2,
+        w: boundSize,
+        h: boundSize*2 + this.height
+      })
+    };
   }
 
   setupStateMachine() {

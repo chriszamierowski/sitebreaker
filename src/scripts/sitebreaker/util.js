@@ -15,3 +15,24 @@ export function getWindowWidth() {
 export function getWindowHeight() {
   return window.innerHeight;
 }
+
+export function getElementFromPoint(game, x, y) {
+  let element;
+  // hide canvas so it isn't picked up
+  game.canvas.classList.add('sitebreaker-hidden');
+
+  element = document.elementFromPoint(x, y);
+
+  if (!element) {
+    game.canvas.classList.remove('sitebreaker-hidden');
+    return false;
+  }
+  
+  // if it's a text node, take the parent instead
+  if (element.nodeType == Node.TEXT_NODE) {
+    element = element.parentNode;
+  }
+
+  game.canvas.classList.remove('sitebreaker-hidden');
+  return element;
+}

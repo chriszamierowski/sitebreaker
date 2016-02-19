@@ -2,8 +2,8 @@ export default class Player {
   constructor (game) {
     this.config = {
       speed: 1,
-      width: 150,
-      height: 15,
+      w: 150,
+      h: 15,
       img: 'images/paddle.svg'
     };
 
@@ -18,12 +18,12 @@ export default class Player {
 
   reset() {
     this.speed = this.config.speed;
-    this.width = this.config.width;
-    this.height = this.config.height;
-    this.minX = this.width/2;
-    this.maxX = this.game.width - (this.width/2);
+    this.w = this.config.w;
+    this.h = this.config.h;
+    this.minX = this.w/2;
+    this.maxX = this.game.width - (this.w/2);
 
-    this.setPosition(this.game.width/2, this.game.height - this.height*2);
+    this.setPosition(this.game.width/2, this.game.height - this.h*2);
     this.setDirection(0);
   }
 
@@ -55,7 +55,7 @@ export default class Player {
   }
 
   draw(context) {
-    context.drawImage(this.img, this.x - this.width/2, this.y - this.height/2, this.width, this.height);
+    context.drawImage(this.img, this.x - this.w/2, this.y - this.h/2, this.w, this.h);
   }
 
   moveLeft() {
